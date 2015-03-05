@@ -1,31 +1,31 @@
 <?php
 
 class Engine {
-	
+
 	function __construct() {
 		// load in password
 		$this->password = file_get_contents(".password");
 	}
-	
+
 	function apache($action) {
 		switch ($action) {
 			case "get":
 				//exec("echo $password | sudo -S apachectl start", $output, $return);
 				break;
 			case "start":
-				exec("echo {$this->password} | sudo -S apachectl start", $output, $return);
+				exec("sudo -u root -S {{ apachectl start }} < {$this->password}", $output, $return);
 				break;
 			case "restart":
-				exec("echo {$this->password} | sudo -S apachectl restart", $output, $return);
+				exec("sudo -u root -S {{ apachectl restart }} < {$this->password}", $output, $return);
 				break;
 			case "stop":
-				exec("echo {$this->password} | sudo -S apachectl stop", $output, $return);
+				exec("sudo -u root -S {{ apachectl stop }} < {$this->password}", $output, $return);
 				break;
 			default:
 				break;
 		}
 	}
-	
+
 	function nginx() {
 		switch ($action) {
 			case "get":
@@ -44,9 +44,9 @@ class Engine {
 				break;
 		}
 	}
-	
+
 	function mysql() {
-		
+
 	}
 }
 

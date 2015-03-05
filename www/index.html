@@ -12,6 +12,9 @@
 [ng-click] {
 	cursor: hand;
 }
+.help-block {
+	text-align: center;
+}
 
 /* sticky footer */
 body { height: 100%; }
@@ -107,24 +110,25 @@ function AppCtrl($scope, $http) {
 	$scope['new'] = {};
 	$scope.db = {};
 	$scope.vhost = {};
-	
+
 	$scope.init = function() {
 		// load config
 		/*$http.get('config.json')
 			.success(function(data) {
 				$scope.config = data;
 			});*/
-		
+
 		$http.get('index.php?db')
 			.success(function(data) {
+				console.log(data);
 				$scope.db = data;
 			});
 	}
-	
+
 	$scope.loadVirtualHost = function(vhost) {
 		$scope.vhost = vhost;
 	}
-	
+
 	$scope.newVirtualHost = function(data) {
 		$http.put('index.php?VirtualHost', data)
 			.success(function(data) {
@@ -133,7 +137,7 @@ function AppCtrl($scope, $http) {
 				$scope.engine('apache', 'restart'); // restart apache to active changes
 			});
 	}
-	
+
 	$scope.saveVirtualHost = function(data) {
 		$http.put('index.php?VirtualHost', data)
 			.success(function(data) {
@@ -141,7 +145,7 @@ function AppCtrl($scope, $http) {
 				$scope.engine('apache', 'restart'); // restart apache to active changes
 			});
 	}
-	
+
 	$scope.deleteVirtualHost = function(vhost) {
 		if (confirm('Are you sure you want to delete this host? After clicking `OK`, this action cannot be undone.')) {
 			$http.delete('index.php?VirtualHost='+vhost['id'])
@@ -151,16 +155,16 @@ function AppCtrl($scope, $http) {
 				});
 		}
 	}
-	
+
 	$scope.printVirtualHost = function(vhost) {
 		var allow = ['ServerName','ServerAdmin','ServerAlias','ServerPath','DocumentRoot'];
 		//var ignore = ['id', 'enabled', 'import'];
 		var data = '';
-		
+
 		data += Object.prototype.hasOwnProperty.call(vhost, 'port')
 				? '<VirtualHost *:'+vhost[port]+'>\n'
 				: '<VirtualHost *>\n';
-			
+
 		for(var key in vhost) {
 			/*if (ignore.indexOf(key) !== -1) {
 				continue;
@@ -178,14 +182,14 @@ function AppCtrl($scope, $http) {
 	/*$scope.buttonClick = function() {
 		document.getElementById('file_upload').click();
 	};*/
-	
+
 	$scope.engine = function(engine, action) {
 		$http.get('index.php?'+engine+'='+action)
 			.success(function(data) {
 				//$scope.db = data;
 			});
 	}
-	
+
 	$scope.init();
 }
 </script>
