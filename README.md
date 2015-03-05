@@ -1,14 +1,19 @@
 # .vhosts
 Lightweight VirtualHost manager for Mac. A MAMP alternative.
 
+**Changes to this fork:**
+- Fixed Apache commands (restart, start, and stop)
+
 ## Features
 - Add and modify localhost VirtualHosts
-- Autoload `.vhosts` files from project folders and instert them into global `httpd-vhosts.conf`
+- Autoload `.vhosts` files from project folders and insert them into global `httpd-vhosts.conf`
 
 ![Alt text][screenshot]
 
 ## Install
-Run in Terminal: `curl -s https://raw.github.com/willfarrell/.vhosts/master/boostrap.sh -o boostrap.sh && bash boostrap.sh && rm boostrap.sh`
+1. Clone repository to ~/Sites
+
+2. `sh boostrap.sh`
 
 **Requirements:**
 
