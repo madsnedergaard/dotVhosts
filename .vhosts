@@ -2,3 +2,8 @@
     ServerName vhosts.localhost
     DocumentRoot __DIR__/www
 </VirtualHost>
+
+<VirtualHost *>
+    ServerName vhosts
+    DocumentRoot __DIR__/www
+</VirtualHost>
