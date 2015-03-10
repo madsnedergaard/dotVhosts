@@ -3,6 +3,8 @@ Lightweight VirtualHost manager for Mac. A MAMP alternative.
 
 **Changes to this fork:**
 - Fixed Apache commands (restart, start, and stop)
+- Added support for custom messages
+- Disabled restart-apache-button for now
 
 ## Features
 - Add and modify localhost VirtualHosts
