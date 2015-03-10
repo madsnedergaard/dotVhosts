@@ -9,6 +9,12 @@
 	margin-bottom:0;
 }
 
+.alert {
+	max-width: 50%;
+	margin: 1em auto;
+	text-align: center;
+}
+
 [ng-click] {
 	cursor: hand;
 }
@@ -56,6 +62,7 @@ body { height: 100%; }
 <div class="wrapper">
 	<div class="header" ng-include="'partials/nav.html'"></div>
 	<div class="container">
+		<div class="alert alert-success" ng-show="isMessage" ng-bind="message"></div>
 		<div class="row">
 			<div class="span6" ng-include="'partials/virtualhosts.html'"></div>
 			<div class="span6" ng-include="'partials/virtualhost.html'"></div>
@@ -68,7 +75,9 @@ body { height: 100%; }
 <script src="lib/angular.js"></script>
 <script>
 var app = angular.module('app', []);
-
+app.config(function($locationProvider) {
+        $locationProvider.html5Mode(true);
+    });
 app.filter('precate', function() {
 	return function(text, length, start) {
 		if (isNaN(length)) { length = 10; }
@@ -104,12 +113,18 @@ app.filter('objectArray', function() {
 });
 
 
-function AppCtrl($scope, $http) {
+function AppCtrl($scope, $http, $location) {
 	$scope.version = '0.0.1';
 	//$scope.config = {};
 	$scope['new'] = {};
 	$scope.db = {};
 	$scope.vhost = {};
+
+	urlmessage = $location.search().msg;
+	if (urlmessage != undefined) {
+		$scope.isMessage = true;
+		$scope.message = urlmessage;
+	}
 
 	$scope.init = function() {
 		// load config
