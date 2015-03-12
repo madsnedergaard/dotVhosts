@@ -6,6 +6,9 @@ Lightweight VirtualHost manager for Mac. A MAMP alternative.
 - Added support for custom messages
 - Disabled restart-apache-button for now
 
+**Roadmap for this fork:**
+- Proper support for sub-directories
+
 ## Features
 - Add and modify localhost VirtualHosts
 - Autoload `.vhosts` files from project folders and insert them into global `httpd-vhosts.conf`
